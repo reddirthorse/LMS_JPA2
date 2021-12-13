@@ -9,11 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
 
+    @Transactional
+    //default값이 false임으로 등록기능에 추가해준다.
     public Long join(Member member){
         validateDuplicatedMember(member);
         memberRepository.save(member);
