@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,6 +35,25 @@ public class MemberController {
 
         memberService.join(member);
 
+        return "redirect:/";
+    }
+    @GetMapping("/members")
+    public String list(Model model){
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members",members);
+        return "members/memberList";
+    }
+    @GetMapping("members/login")
+    public String createLoginForm(Model model){
+        model.addAttribute("loginForm",new LoginForm());
+        return "members/login";
+    }
+    @PostMapping("members/login")
+    public String logIn(@Valid LoginForm loginForm,BindingResult result){
+        if(result.hasErrors()){
+            return "redirect:/";
+        }
+        memberService.Login(loginForm.getUser_id(),loginForm.getPassword());
         return "redirect:/";
     }
 }

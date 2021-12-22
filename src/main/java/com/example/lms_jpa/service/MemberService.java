@@ -35,4 +35,14 @@ public class MemberService {
     public Member findOne(Long id){
         return memberRepository.findOne(id);
     }
+    //use_id를 통한 회원 조회
+    public Member findByUser_Id(String user_id){
+        return memberRepository.findByUser_Id(user_id);
+    }
+    //로그인
+    public String Login(String user_id, String password){
+        if(user_id == findByUser_Id(user_id).getUser_id() && password == findByUser_Id(user_id).getPassword()){
+            return findByUser_Id(user_id).getUser_id();
+        }else return "아이디와 비밀번호를 확인하십시오";
+    }
 }

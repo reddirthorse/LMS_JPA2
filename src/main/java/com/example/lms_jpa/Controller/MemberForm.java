@@ -12,6 +12,8 @@ public class MemberForm {
     private String user_id;
     @NotEmpty(message = "회원 이름을 입력하세요")
     private String name;
+    @NotEmpty(message = "패스워드를 입력하세요")
+    private String password;
 
 
 }

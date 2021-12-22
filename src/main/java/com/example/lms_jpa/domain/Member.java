@@ -20,5 +20,7 @@ public class Member {
     private String user_id;
     @Column(name = "member_name")
     private String name;
+    @Column(name = "password")
+    private String password;
 
 }
